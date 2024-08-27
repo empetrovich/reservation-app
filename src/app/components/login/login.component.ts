@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
+
 export class LoginComponent implements OnInit{
   loginUser: FormGroup;
   loading: boolean = false;
@@ -30,7 +31,6 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit(): void {}
-
 
   login() {
     const email = this.loginUser.value.email;
