@@ -21,7 +21,7 @@ export class AuthService {
   }
 
 /*isVerified() {
-    return this.afAuth.currentUser.then(user => user?.emailVerified);
+    return this.afAuth.currentUser.then(user => user?.emailVerified); //my notes
   }*/
 
   signOut() {
