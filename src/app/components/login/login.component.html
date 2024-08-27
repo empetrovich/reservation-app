@@ -1,0 +1,37 @@
+<div class="d-flex align-items-center py-4" style="height: 100%;">
+    <main class="form-signin w-100 m-auto text-center">
+        <div *ngIf="!loading">
+            <img class="mb-4 mx-auto d-block" src="../../../assets/img/login.png" alt="Login" width="90" height="90">
+            <h1 class="h3 mb-3 text-center fw-normal">Login</h1>
+        
+            <form (ngSubmit)="login()" [formGroup]="loginUser">
+                <div class="form-floating">
+                    <input type="email" class="form-control" id="floatingInput" formControlName="email" placeholder="name@example.com">
+                    <label for="floatingInput">Email address</label>
+                    <span *ngIf="loginUser.get('email')?.hasError('required') && loginUser.get('email')?.touched" class="text-danger errLabel">
+                        The <strong>email</strong> is required
+                    </span>
+                    <span *ngIf="loginUser.get('email')?.hasError('email') && loginUser.get('email')?.touched" class="text-danger errLabel">
+                        Your <strong>email</strong> is invalid
+                    </span>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control mt-2" id="floatingPassword" formControlName="password" placeholder="Password">
+                    <label for="floatingPassword">Password</label>
+                    <span *ngIf="loginUser.get('password')?.hasError('required') && loginUser.get('password')?.touched" class="text-danger errLabel">
+                        The <strong>password</strong> is required
+                    </span>
+                    <span *ngIf="loginUser.get('password')?.hasError('minlength') && loginUser.get('password')?.touched" class="text-danger errLabel">
+                        Your <strong>password</strong> needs to be at least 6 characters long.
+                    </span>
+                </div>
+
+                <button class="btn btn-primary w-100 py-2 mt-3" [disabled]="loginUser.invalid" type="submit">Submit</button>
+
+                <p class="mt-3">Don't have an account? <a routerLink="/register-user">Register Here</a></p>
+                <p><a routerLink="/password-recovery">Forgot Password?</a></p>
+            </form>
+        </div>
+        <app-spinner *ngIf="loading"></app-spinner>
+    </main>
+</div>

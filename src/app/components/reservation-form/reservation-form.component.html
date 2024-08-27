@@ -1,0 +1,121 @@
+<div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-end justify-content-md-between py-3 mb-4">
+      <div class="col-md-3 mb-2 mb-md-0">
+      </div>
+
+      <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-primary me-2" (click)="logOut()">Logout</button>
+      </div>
+    </header>
+
+    <div class="p-3 pb-md-4 mx-auto">
+        <h1 class="h3 fw-normal text-body-emphasis">Hi, {{ dataUser?.email }}!</h1>
+    </div>
+
+    <div class="d-flex align-items-center py-4" style="height: 100%;">
+        <main class="form-reservation w-100 m-auto text-center">
+            <div *ngIf="!loading">
+                <img class="mb-4 mx-auto d-block" src="../../../assets/img/destination.png" alt="Login" width="90" height="90">
+                <h1 class="h3 mb-3 text-center fw-normal">Make Your Reservation!</h1>
+            
+                <form (ngSubmit)="reserve()" [formGroup]="reservationForm">
+                    <div class="row g-2">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" formControlName="name" id="name" placeholder="Name">
+                                <label for="name">Name</label>
+                                <span *ngIf="reservationForm.get('name')?.hasError('required') && reservationForm.get('name')?.touched" class="text-danger errLabel">
+                                    The <strong>name</strong> is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="email" class="form-control" formControlName="email" id="email" placeholder="name@example.com">
+                                <label for="email">Email</label>
+                                <span *ngIf="reservationForm.get('email')?.hasError('required') && reservationForm.get('email')?.touched" class="text-danger errLabel">
+                                    The <strong>email</strong> is required
+                                </span>
+                                <span *ngIf="reservationForm.get('email')?.hasError('email') && reservationForm.get('email')?.touched" class="text-danger errLabel">
+                                    Your <strong>email</strong> is invalid
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-2 mt-1">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <select class="form-select" formControlName="airline" id="airline" aria-label="Airline">
+                                  <option *ngFor="let airline of airlines" [value]="airline.value">
+                                    {{ airline.label }}
+                                  </option>
+                                </select>
+                                <label for="airline">Select Airline</label>
+                                <span *ngIf="reservationForm.get('airline')?.hasError('required') && reservationForm.get('airline')?.touched" class="text-danger errLabel">
+                                    The <strong>airline</strong> is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" formControlName="flightnum" id="flightnum" placeholder="Flight Number">
+                                <label for="flightnum">Flight Number</label>
+                                <span *ngIf="reservationForm.get('flightnum')?.hasError('required') && reservationForm.get('flightnum')?.touched" class="text-danger errLabel">
+                                    The <strong>flight number</strong> is required
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-2 mt-1">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" formControlName="arrivaldate" id="arrivaldate" placeholder="Arrival Date">
+                                <label for="arrivaldate">Arrival Date</label>
+                                <span *ngIf="reservationForm.get('arrivaldate')?.hasError('required') && reservationForm.get('arrivaldate')?.touched" class="text-danger errLabel">
+                                    The <strong>arrival date</strong> is required
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="time" class="form-control" formControlName="arrivaltime" id="arrivaltime" placeholder="Arrival Time">
+                                <label for="arrivaltime">Arrival Time</label>
+                                <span *ngIf="reservationForm.get('arrivaltime')?.hasError('required') && reservationForm.get('arrivaltime')?.touched" class="text-danger errLabel">
+                                    The <strong>arrival time</strong> is required
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-2 mt-1">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <input type="number" class="form-control" formControlName="numguests" id="numguests" placeholder="Arrival Date">
+                                <label for="numguests">Number of Guests</label>
+                                <span *ngIf="reservationForm.get('numguests')?.hasError('required') && reservationForm.get('numguests')?.touched" class="text-danger errLabel">
+                                    The <strong>number of guests</strong> is required
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-2 mt-1">
+                        <div class="col-md">
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here" formControlName="comments" id="comments" style="height: 100px"></textarea>
+                                <label for="comments">Comments</label>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <button class="btn btn-primary w-100 py-2 mt-3" [disabled]="reservationForm.invalid" type="submit">Submit</button>
+                </form> 
+            </div>
+            <app-spinner *ngIf="loading"></app-spinner>
+        </main>
+    
+    </div>
+
+  </div>
