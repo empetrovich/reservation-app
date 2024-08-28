@@ -60,9 +60,13 @@ export class ReservationFormComponent implements OnInit{
 
   reserve() {
     //console.log(this.reservationForm.value);
-    const headers = new HttpHeaders({'Candidate': 'Elvis Petrovich'});
+    const headers = new HttpHeaders({
+      'token': 'WW91IG11c3QgYmUgdGhlIGN1cmlvdXMgdHlwZS4gIEJyaW5nIHRoaXMgdXAgYXQgdGhlIGludGVydmlldyBmb3IgYm9udXMgcG9pbnRzICEh',
+      'Candidate': 'Elvis Petrovich'
+    });
 
-    this.http.post("https://reservation-app-b1820-default-rtdb.firebaseio.com/reservations.json",
+    //this.http.post("https://reservation-app-b1820-default-rtdb.firebaseio.com/reservations.json",
+    this.http.post("https://us-central1-crm-sdk.cloudfunctions.net/flightInfoChallenge",      
       {
           "airline": this.reservationForm.value.airline,
           "arrivalDate": this.reservationForm.value.arrivaldate,
